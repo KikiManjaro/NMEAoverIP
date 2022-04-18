@@ -10,17 +10,17 @@ class CustomMap extends StatefulWidget {
   const CustomMap({Key? key}) : super(key: key);
 
   @override
-  State<CustomMap> createState() => _CustomMapState();
+  State<CustomMap> createState() => CustomMapState();
 }
 
-class _CustomMapState extends State<CustomMap> {
+class CustomMapState extends State<CustomMap> {
   final controller = MapController(
     location: LatLng(NMEA.pos.latitude, NMEA.pos.longitude),
   );
 
   bool _darkMode = false;
 
-  _CustomMapState() {
+  CustomMapState() {
     NMEA.mapState = this;
   }
 
@@ -37,7 +37,7 @@ class _CustomMapState extends State<CustomMap> {
   //   }
   // }
 
-  void _gotoDefault() {
+  void gotoDefault() {
     controller.center = LatLng(NMEA.pos.latitude, NMEA.pos.longitude);
     setState(() {});
   }
@@ -92,9 +92,10 @@ class _CustomMapState extends State<CustomMap> {
       // height: 24,
       child: Text(
         'Lat: ${NMEA.pos.latitude.toStringAsFixed(4)}, Lon: ${NMEA.pos.longitude.toStringAsFixed(4)}',
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 16,
-          color: Colors.black,
+          backgroundColor: Color(0xA0FFFFFF),
+          color: const Color(0xFF424242),
           fontWeight: FontWeight.bold,
         ),
       ),
@@ -110,7 +111,7 @@ class _CustomMapState extends State<CustomMap> {
           var homeMarkerWidget = _buildMarkerWidget(
               transformer.fromLatLngToXYCoords(
                   LatLng(NMEA.pos.latitude, NMEA.pos.longitude)),
-              Colors.black);
+              const Color(0xFF424242));
           var homeMarkerLabel = _buildMarkerLabel(
               transformer.fromLatLngToXYCoords(
                   LatLng(NMEA.pos.latitude, NMEA.pos.longitude)));
@@ -173,7 +174,8 @@ class _CustomMapState extends State<CustomMap> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _gotoDefault,
+        backgroundColor: Colors.grey[800],
+        onPressed: gotoDefault,
         tooltip: 'My Location',
         child: const Icon(Icons.my_location),
       ),

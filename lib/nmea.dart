@@ -3,6 +3,7 @@ import 'dart:collection';
 import 'package:flutter/widgets.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:nmea_to_network/ip.dart';
+import 'package:nmea_to_network/map.dart';
 
 class NMEA {
   static NmeaMessage nmea = NmeaMessage("", DateTime(0));
@@ -19,7 +20,7 @@ class NMEA {
   static var nmeaList = ListQueue<NmeaMessage>();
 
   static State? locationState;
-  static State? mapState;
+  static CustomMapState? mapState;
 
   static Future<void> initNmeaReading() async {
     bool serviceEnabled;
@@ -58,7 +59,12 @@ class NMEA {
     });
 
     Geolocator.getPositionStream().listen((pos) {
-      NMEA.pos = pos;
+      if (NMEA.pos.latitude == 0 && NMEA.pos.longitude == 0) {
+        NMEA.pos = pos;
+        mapState?.gotoDefault();
+      } else {
+        NMEA.pos = pos;
+      }
     });
   }
 }

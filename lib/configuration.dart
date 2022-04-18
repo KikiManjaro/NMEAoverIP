@@ -21,6 +21,7 @@ class _ConfigurationState extends State<Configuration> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.grey[800],
         onPressed: () => createIP(),
         tooltip: 'Create Conf.',
         child: const Icon(Icons.add),

@@ -4,7 +4,7 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:nmea_to_network/configuration.dart';
 import 'package:nmea_to_network/ip.dart';
-import 'package:nmea_to_network/location.dart';
+import 'package:nmea_to_network/location_data.dart';
 import 'package:nmea_to_network/map.dart';
 import 'package:nmea_to_network/nmea.dart';
 
@@ -14,7 +14,7 @@ void main() => runApp(MaterialApp(
       NMEA.initNmeaReading();
       return Directionality(textDirection: TextDirection.ltr, child: child!);
     },
-    title: 'GNav',
+    title: 'NMEAoverIP',
     theme: ThemeData(
       primaryColor: Colors.grey[800],
     ),
@@ -32,13 +32,9 @@ class _MainStateState extends State<MainState> {
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.w600);
   static final List<Widget> _widgetOptions = <Widget>[
-    const Location(),
-    const Configuration(),
     const CustomMap(),
-    const Text(
-      'Profile',
-      style: optionStyle,
-    ),
+    const LocationData(),
+    const Configuration(),
   ];
 
   @override
@@ -46,8 +42,9 @@ class _MainStateState extends State<MainState> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Colors.grey[600],
         elevation: 20,
-        title: const Text('NMEA Over Network'),
+        title: const Text('NMEA Over IP'),
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
@@ -81,16 +78,12 @@ class _MainStateState extends State<MainState> {
                   text: 'Location',
                 ),
                 GButton(
+                  icon: LineIcons.info,
+                  text: 'Info',
+                ),
+                GButton(
                   icon: LineIcons.edit,
                   text: 'Configuration',
-                ),
-                GButton(
-                  icon: LineIcons.map,
-                  text: 'Map',
-                ),
-                GButton(
-                  icon: LineIcons.user,
-                  text: 'Profile',
                 ),
               ],
               selectedIndex: _selectedIndex,
