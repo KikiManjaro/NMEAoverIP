@@ -84,6 +84,23 @@ class _CustomMapState extends State<CustomMap> {
     );
   }
 
+  Widget _buildMarkerLabel(Offset pos) {
+    return Positioned(
+      left: pos.dx - 96,
+      top: pos.dy - 36,
+      // width: 24,
+      // height: 24,
+      child: Text(
+        'Lat: ${NMEA.pos.latitude.toStringAsFixed(4)}, Lon: ${NMEA.pos.longitude.toStringAsFixed(4)}',
+        style: const TextStyle(
+          fontSize: 16,
+          color: Colors.black,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,7 +110,10 @@ class _CustomMapState extends State<CustomMap> {
           var homeMarkerWidget = _buildMarkerWidget(
               transformer.fromLatLngToXYCoords(
                   LatLng(NMEA.pos.latitude, NMEA.pos.longitude)),
-              Colors.blue);
+              Colors.black);
+          var homeMarkerLabel = _buildMarkerLabel(
+              transformer.fromLatLngToXYCoords(
+                  LatLng(NMEA.pos.latitude, NMEA.pos.longitude)));
 
           return GestureDetector(
             behavior: HitTestBehavior.opaque,
@@ -144,6 +164,7 @@ class _CustomMapState extends State<CustomMap> {
                     },
                   ),
                   homeMarkerWidget,
+                  homeMarkerLabel
                   // centerMarkerWidget,
                 ],
               ),
