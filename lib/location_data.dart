@@ -53,8 +53,10 @@ class _LocationDataState extends State<LocationData> {
             height: 3,
           ),
           Text('${nmeaObj.timestamp} :',
-              style:
-                  const TextStyle(fontSize: 10, fontStyle: FontStyle.italic, fontWeight: FontWeight.bold)),
+              style: const TextStyle(
+                  fontSize: 10,
+                  fontStyle: FontStyle.italic,
+                  fontWeight: FontWeight.bold)),
           Text(nmeaObj.message, style: const TextStyle(fontSize: 10)),
         ],
       ));

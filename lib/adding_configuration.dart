@@ -16,8 +16,7 @@ class _AddingConfigurationState extends State<AddingConfiguration> {
   TextEditingController ipController = TextEditingController(text: IP.subnet);
   TextEditingController portController = TextEditingController(text: '');
 
-
-  _AddingConfigurationState(){
+  _AddingConfigurationState() {
     // compute(IP.discoverNetwork, null); //TODO: move somewhere else maybe
   }
 
@@ -43,7 +42,8 @@ class _AddingConfigurationState extends State<AddingConfiguration> {
                         value: NetworkType.UDP,
                       ),
                       DropdownMenuItem<NetworkType>(
-                        child: Text(getNetworkTypeString(NetworkType.MULTICAST)),
+                        child:
+                            Text(getNetworkTypeString(NetworkType.MULTICAST)),
                         value: NetworkType.MULTICAST,
                       ),
                     ],
