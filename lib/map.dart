@@ -92,10 +92,10 @@ class CustomMapState extends State<CustomMap> {
       // height: 24,
       child: Text(
         'Lat: ${NMEA.pos.latitude.toStringAsFixed(4)}, Lon: ${NMEA.pos.longitude.toStringAsFixed(4)}',
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 16,
           backgroundColor: Color(0xA0FFFFFF),
-          color: const Color(0xFF424242),
+          color: Color(0xFF424242),
           fontWeight: FontWeight.bold,
         ),
       ),

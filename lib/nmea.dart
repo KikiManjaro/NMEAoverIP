@@ -54,6 +54,7 @@ class NMEA {
       }
 
       IP.sendUDPMessage(nmea.message);
+      IP.sendMulticastMessage(nmea.message);
       locationState?.setState(() {});
       mapState?.setState(() {});
     });
