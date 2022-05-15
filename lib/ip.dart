@@ -1,25 +1,56 @@
+import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:lan_scanner/lan_scanner.dart';
 import 'package:network_info_plus/network_info_plus.dart';
 import 'package:nmea_to_network/adding_configuration.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:udp/udp.dart';
 
 class IP {
   static LanScanner scanner = LanScanner();
   static LanScanner backgroundScanner = LanScanner();
   static late UDP sender;
+  static late SharedPreferences prefs;
   static String? subnet = "";
   static List<HostModel> networkDevices = <HostModel>[];
   static AddingConfigurationState? addingConfigurationState;
 
   static List<IPConf> confList = <IPConf>[
-    IPConf(NetworkType.UDP, "192.168.0.33", 30304)
+    // IPConf(NetworkType.UDP, "192.168.0.33", 30304)
   ];
 
-  static Future<void> initSocket() async {
+  static init() async {
+    initPref();
+    initSocket();
+  }
+
+  static initSocket() async {
     sender = await UDP.bind(Endpoint.any(port: const Port(33333)));
+  }
+
+  static initPref() async {
+    prefs = await SharedPreferences.getInstance();
+    final String? confs = prefs.getString('confList');
+    if (confs != null) {
+      confList.clear();
+      var decodedConf = jsonDecode(confs) as List;
+      for (var elem in decodedConf) {
+        IPConf conf = IPConf.fromJson(elem);
+        confList.add(conf);
+      }
+    }
+  }
+
+  static addConf(IPConf ipConf) async {
+    confList.add(ipConf);
+    await prefs.setString('confList', jsonEncode(confList));
+  }
+
+  static void remove(IPConf conf) async {
+    confList.remove(conf);
+    await prefs.setString('confList', jsonEncode(confList));
   }
 
   static Future<void> sendUDPMessage(String message) async {
@@ -60,27 +91,6 @@ class IP {
     return bytes;
   }
 
-  // static Future<Set<HostModel>> discoverNetwork() async {
-  //   networkDevices.clear();
-  //   await findSubnet();
-  //   if (subnet == null) {
-  //     print('No wifi network found');
-  //   } else {
-  //     final stream =
-  //         HostScanner.discover(subnet!, progressCallback: (progress) {
-  //       print('Progress for host discovery : $progress');
-  //     });
-  //
-  //     stream.listen((host) {
-  //       networkDevices.add(host);
-  //       print('Found device: ${host}');
-  //     }, onDone: () {
-  //       print('Scan completed');
-  //     });
-  //   }
-  //   return networkDevices;
-  // }
-
   static Future<List<HostModel>> discoverNetwork() async {
     await findSubnet();
     if (subnet == null) {
@@ -97,7 +107,9 @@ class IP {
       if (subnet == null) {
         print('No wifi network found');
       } else {
-        scan(backgroundScanner);
+        scan(backgroundScanner,
+            // nbProc: (Platform.numberOfProcessors / 2).floor()
+        );
       }
       return networkDevices;
     }
@@ -150,6 +162,29 @@ class IPConf {
   int port;
 
   IPConf(this.type, this.ip, this.port);
+
+  // IPConf.fromJson(Map<String, dynamic> json)
+  //     : type = NetworkType.UDP.toString() == json['type']
+  //           ? NetworkType.UDP
+  //           : NetworkType.MULTICAST,
+  //       ip = json['ip'],
+  //       port = int.parse(json['port']);
+
+  factory IPConf.fromJson(Map<String, dynamic> json) =>
+      IPConf(
+          NetworkType.UDP.toString() == json['type']
+              ? NetworkType.UDP
+              : NetworkType.MULTICAST,
+          json['ip'],
+          int.parse(json['port']));
+
+  Map<String, dynamic> toJson() {
+    return {
+      'type': type.toString(),
+      'ip': ip,
+      'port': port.toString(),
+    };
+  }
 }
 
 enum NetworkType { UDP, MULTICAST }

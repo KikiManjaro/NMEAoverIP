@@ -40,7 +40,7 @@ class _ConfigurationState extends State<Configuration> {
           trailing: IconButton(
             icon: const Icon(Icons.delete),
             onPressed: () => setState(() {
-              IP.confList.remove(conf);
+              IP.remove(conf);
             }),
           ),
         ),

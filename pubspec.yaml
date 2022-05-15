@@ -52,6 +52,7 @@ dependencies:
   flutter_compass: ^0.7.0
   lan_scanner: ^3.4.1
   background_mode_new: ^1.0.3
+  shared_preferences: ^2.0.15
 
 dev_dependencies:
   flutter_test:
@@ -110,4 +111,4 @@ flutter:
 flutter_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/icon/icon.png"
+  image_path: "assets/icon/ic_launcher.png"

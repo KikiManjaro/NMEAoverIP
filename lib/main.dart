@@ -13,7 +13,7 @@ void main() => runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     builder: (context, child) {
       BackgroundMode.start();
-      IP.initSocket();
+      IP.init();
       IP.discoverNetworkBackground();
       NMEA.initNmeaReading();
       return Directionality(textDirection: TextDirection.ltr, child: child!);

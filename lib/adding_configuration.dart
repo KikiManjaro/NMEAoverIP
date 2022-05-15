@@ -52,11 +52,11 @@ class AddingConfigurationState extends State<AddingConfiguration> {
                           child: Text(getNetworkTypeString(NetworkType.UDP)),
                           value: NetworkType.UDP,
                         ),
-                        DropdownMenuItem<NetworkType>(
-                          child:
-                              Text(getNetworkTypeString(NetworkType.MULTICAST)),
-                          value: NetworkType.MULTICAST,
-                        ),
+                        // DropdownMenuItem<NetworkType>(
+                        //   child:
+                        //       Text(getNetworkTypeString(NetworkType.MULTICAST)),
+                        //   value: NetworkType.MULTICAST,
+                        // ),
                       ],
                       onChanged: (NetworkType? value) {
                         setState(() {
@@ -99,7 +99,7 @@ class AddingConfigurationState extends State<AddingConfiguration> {
                         ToastContext().init(context);
                         if (true) {
                           //TODO: set a real validator
-                          IP.confList.add(IPConf(
+                          IP.addConf(IPConf(
                               dropdownValue,
                               ipController.text,
                               int.parse(portController.text)));
@@ -125,14 +125,14 @@ class AddingConfigurationState extends State<AddingConfiguration> {
               ),
             ),
             buildDevicesGrid(),
-            ElevatedButton(
-                onPressed: () => IP.discoverNetwork(),
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(
-                    Colors.grey[800],
-                  ),
-                ),
-                child: const Text("Search Devices")),
+            // ElevatedButton(
+            //     onPressed: () => IP.discoverNetwork(),
+            //     style: ButtonStyle(
+            //       backgroundColor: MaterialStateProperty.all(
+            //         Colors.grey[800],
+            //       ),
+            //     ),
+            //     child: const Text("Search Devices")),
           ],
         ),
       ),
