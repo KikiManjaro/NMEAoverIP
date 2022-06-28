@@ -1,4 +1,4 @@
-package com.example.nmea_to_network
+package com.kikimanjaro.nmea_to_network
 
 //import androidx.annotation.NonNull
 //import io.flutter.embedding.engine.FlutterEngine

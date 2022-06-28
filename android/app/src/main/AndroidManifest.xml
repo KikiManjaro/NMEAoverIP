@@ -1,10 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.nmea_to_network">
+    package="com.kikimanjaro.nmea_to_network">
 
     <application
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon"
-        android:label="nmea_to_network">
+        android:label="NMEA Over Network">
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"

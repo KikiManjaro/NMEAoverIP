@@ -48,7 +48,7 @@ class _MainStateState extends State<MainState> {
       appBar: AppBar(
         backgroundColor: Colors.grey[600],
         elevation: 20,
-        title: const Text('NMEA Over IP'),
+        title: const Text('NMEA Over Network'),
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
