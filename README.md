@@ -12,9 +12,9 @@ Sends NMEA sentences from Android over a network
 
 ## Informations
 
-NMEA over IP is an app that sends NMEA sentences of GPS grabbed from you Android smartphone over a network.
-You're able to see all your position informations in real time, even NMEA sentences that are received.
-It automatically find all of the availables devices on the network you're connected to, you can then simply choose the one's that you want to send UDP data to.
+NMEA over IP is an application that sends NMEA (GPS) sentences from your Android smartphone over a network.
+You can see all your position information in real time, even the NMEA sentences that are received.
+It automatically finds all available devices on the network you're connected to, and then you can simply choose which one you want to send UDP data to.
 
 ## Contributing
 
