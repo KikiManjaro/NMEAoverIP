@@ -1,4 +1,4 @@
-import 'package:background_mode_new/background_mode_new.dart';
+// import 'package:background_mode_new/background_mode_new.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -12,7 +12,7 @@ import 'package:nmea_to_network/nmea.dart';
 void main() => runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     builder: (context, child) {
-      BackgroundMode.start();
+      // BackgroundMode.start();
       IP.init();
       IP.discoverNetworkBackground();
       NMEA.initNmeaReading();
