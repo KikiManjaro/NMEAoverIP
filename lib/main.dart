@@ -8,6 +8,7 @@ import 'package:nmea_to_network/ip.dart';
 import 'package:nmea_to_network/location_data.dart';
 import 'package:nmea_to_network/map.dart';
 import 'package:nmea_to_network/nmea.dart';
+import 'package:nmea_to_network/usb.dart';
 
 void main() => runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
@@ -16,6 +17,7 @@ void main() => runApp(MaterialApp(
       IP.init();
       IP.discoverNetworkBackground();
       NMEA.initNmeaReading();
+      Serial().changeColor("0xFF2196F3");
       return Directionality(textDirection: TextDirection.ltr, child: child!);
     },
     title: 'NMEAoverIP',
