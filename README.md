@@ -1,6 +1,4 @@
-# NMEA over IP
-
-# <img align="center" src="https://play-lh.googleusercontent.com/6M5GsRSPP-TKbwZDoIUGn_9-mYiTtesXjoy5MMWeXGqHBuZZfZQeftOM2EitzIMfQA=w240-h480-rw" data-canonical-src="https://play-lh.googleusercontent.com/6M5GsRSPP-TKbwZDoIUGn_9-mYiTtesXjoy5MMWeXGqHBuZZfZQeftOM2EitzIMfQA=w240-h480-rw" height="40" /> Memepedia
+# <img align="center" src="https://play-lh.googleusercontent.com/6M5GsRSPP-TKbwZDoIUGn_9-mYiTtesXjoy5MMWeXGqHBuZZfZQeftOM2EitzIMfQA=w240-h480-rw" data-canonical-src="https://play-lh.googleusercontent.com/6M5GsRSPP-TKbwZDoIUGn_9-mYiTtesXjoy5MMWeXGqHBuZZfZQeftOM2EitzIMfQA=w240-h480-rw" height="40" /> NMEA over IP
 
 Sends NMEA sentences from Android over a network
 
