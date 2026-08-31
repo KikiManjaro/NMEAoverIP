@@ -1,6 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_compass/flutter_compass.dart';
+// import 'package:flutter_compass/flutter_compass.dart'; // unused — uncomment when compass widget is re-enabled
 import 'package:line_icons/line_icons.dart';
 import 'package:nmea_to_network/nmea.dart';
 
@@ -12,10 +11,6 @@ class LocationData extends StatefulWidget {
 }
 
 class _LocationDataState extends State<LocationData> {
-  bool _hasPermissions = false;
-  CompassEvent? _lastRead;
-  DateTime? _lastReadAt;
-
   _LocationDataState() {
     NMEA.locationState = this;
   }

@@ -1,5 +1,4 @@
 // import 'package:background_mode_new/background_mode_new.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
@@ -61,7 +60,7 @@ class _MainStateState extends State<MainState> {
           boxShadow: [
             BoxShadow(
               blurRadius: 20,
-              color: Colors.black.withOpacity(.1),
+              color: Colors.black.withValues(alpha: 0.1), // was withOpacity(.1)
             )
           ],
         ),

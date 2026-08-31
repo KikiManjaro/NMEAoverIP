@@ -114,7 +114,7 @@ class AddingConfigurationState extends State<AddingConfiguration> {
                         }
                       },
                       style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
+                        backgroundColor: WidgetStateProperty.all(
                           Colors.grey[800],
                         ),
                       ),
@@ -128,7 +128,7 @@ class AddingConfigurationState extends State<AddingConfiguration> {
             // ElevatedButton(
             //     onPressed: () => IP.discoverNetwork(),
             //     style: ButtonStyle(
-            //       backgroundColor: MaterialStateProperty.all(
+            //       backgroundColor: WidgetStateProperty.all(
             //         Colors.grey[800],
             //       ),
             //     ),

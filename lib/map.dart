@@ -1,5 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:latlng/latlng.dart';
@@ -127,9 +127,9 @@ class CustomMapState extends State<CustomMap> {
 
               final clicked = transformer.fromLatLngToXYCoords(location);
 
-              print('${location.longitude}, ${location.latitude}');
-              print('${clicked.dx}, ${clicked.dy}');
-              print('${details.localPosition.dx}, ${details.localPosition.dy}');
+              debugPrint('${location.longitude}, ${location.latitude}');
+              debugPrint('${clicked.dx}, ${clicked.dy}');
+              debugPrint('${details.localPosition.dx}, ${details.localPosition.dy}');
             },
             child: Listener(
               behavior: HitTestBehavior.opaque,
