@@ -14,9 +14,11 @@ void main() => runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     builder: (context, child) {
       // BackgroundMode.start();
-      IP.init();
-      IP.discoverNetworkBackground();
-      NMEA.initNmeaReading();
+      // Fire-and-forget async init — NMEA/IP streams self-update via setState.
+      // We intentionally do not await here because MaterialApp.builder is sync.
+      unawaited(IP.init());
+      unawaited(IP.discoverNetworkBackground());
+      unawaited(NMEA.initNmeaReading());
       Serial().changeColor("0xFF2196F3");
       return Directionality(textDirection: TextDirection.ltr, child: child!);
     },
@@ -61,7 +63,7 @@ class _MainStateState extends State<MainState> {
           boxShadow: [
             BoxShadow(
               blurRadius: 20,
-              color: Colors.black.withOpacity(.1),
+              color: Colors.black.withValues(alpha: 0.1),
             )
           ],
         ),

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
@@ -67,7 +68,12 @@ class CustomMapState extends State<CustomMap> {
       setState(() {});
     } else {
       final now = details.focalPoint;
-      final diff = now - _dragStart!;
+      final start = _dragStart;
+      if (start == null) {
+        _dragStart = now;
+        return;
+      }
+      final diff = now - start;
       _dragStart = now;
       controller.drag(diff.dx, diff.dy);
       setState(() {});
@@ -121,16 +127,7 @@ class CustomMapState extends State<CustomMap> {
             onDoubleTap: _onDoubleTap,
             onScaleStart: _onScaleStart,
             onScaleUpdate: _onScaleUpdate,
-            onTapUp: (details) {
-              final location =
-                  transformer.fromXYCoordsToLatLng(details.localPosition);
-
-              final clicked = transformer.fromLatLngToXYCoords(location);
-
-              print('${location.longitude}, ${location.latitude}');
-              print('${clicked.dx}, ${clicked.dy}');
-              print('${details.localPosition.dx}, ${details.localPosition.dy}');
-            },
+            onTapUp: (details) {},
             child: Listener(
               behavior: HitTestBehavior.opaque,
               onPointerSignal: (event) {

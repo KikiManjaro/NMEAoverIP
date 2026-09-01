@@ -60,7 +60,8 @@ class AddingConfigurationState extends State<AddingConfiguration> {
                       ],
                       onChanged: (NetworkType? value) {
                         setState(() {
-                          dropdownValue = value!;
+                          if (value == null) return;
+                          dropdownValue = value;
                           if (dropdownValue == NetworkType.MULTICAST) {
                             ipController.text =
                                 IP.subnet != null ? '${IP.subnet}.255' : '';
@@ -114,7 +115,7 @@ class AddingConfigurationState extends State<AddingConfiguration> {
                         }
                       },
                       style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
+                        backgroundColor: WidgetStateProperty.all(
                           Colors.grey[800],
                         ),
                       ),
@@ -128,7 +129,7 @@ class AddingConfigurationState extends State<AddingConfiguration> {
             // ElevatedButton(
             //     onPressed: () => IP.discoverNetwork(),
             //     style: ButtonStyle(
-            //       backgroundColor: MaterialStateProperty.all(
+            //       backgroundColor: WidgetStateProperty.all(
             //         Colors.grey[800],
             //       ),
             //     ),
