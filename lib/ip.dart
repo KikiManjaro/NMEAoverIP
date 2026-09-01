@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:flutter/foundation.dart';
 import 'package:lan_scanner/lan_scanner.dart';
 import 'package:network_info_plus/network_info_plus.dart';
 import 'package:nmea_to_network/adding_configuration.dart';
@@ -62,7 +63,7 @@ class IP {
               Endpoint.unicast(InternetAddress(conf.ip),
                   port: Port(conf.port)));
         } catch (e) {
-          print('Error while sending UDP $e');
+          debugPrint('Error while sending UDP $e');
         }
       }
     }
@@ -77,7 +78,7 @@ class IP {
               Endpoint.multicast(InternetAddress(conf.ip),
                   port: Port(conf.port)));
         } catch (e) {
-          print('Error while sending Multicast $e');
+          debugPrint('Error while sending Multicast $e');
         }
       }
     }
@@ -94,7 +95,7 @@ class IP {
   static Future<List<HostModel>> discoverNetwork() async {
     await findSubnet();
     if (subnet == null) {
-      print('No wifi network found');
+      debugPrint('No wifi network found');
     } else {
       scan(scanner, nbProc: Platform.numberOfProcessors);
     }
@@ -105,7 +106,7 @@ class IP {
     if (Platform.numberOfProcessors > 3) {
       await findSubnet();
       if (subnet == null) {
-        print('No wifi network found');
+        debugPrint('No wifi network found');
       } else {
         scan(backgroundScanner,
             // nbProc: (Platform.numberOfProcessors / 2).floor()
@@ -122,7 +123,7 @@ class IP {
         // timeout: const Duration(milliseconds: 200),
         scanThreads: nbProc,
         progressCallback: (progress) {
-          print('progress: $progress');
+          debugPrint('progress: $progress');
         },
       );
       stream.listen((HostModel host) {
@@ -135,13 +136,13 @@ class IP {
         if (toAdd) {
           networkDevices.add(host);
           if (host.ip != InternetAddress(host.ip).host) {
-            print('Found device: ${InternetAddress(host.ip).host}');
+            debugPrint('Found device: ${InternetAddress(host.ip).host}');
           }
-          print('Found device: $host');
+          debugPrint('Found device: $host');
           addingConfigurationState?.setState(() {});
         }
       }, onDone: () {
-        print('Scan completed');
+        debugPrint('Scan completed');
         networkDevices.sort((a, b) => a.ip.compareTo(b.ip));
         addingConfigurationState?.setState(() {});
       });
