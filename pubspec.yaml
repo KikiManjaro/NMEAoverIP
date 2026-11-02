@@ -17,14 +17,14 @@ dependencies:
   udp: ^5.0.3
   google_nav_bar: ^5.0.6
   line_icons: ^2.0.1
-  map: 1.0.1
+  map: ^1.4.2
   cached_network_image: ^3.3.1
   network_info_plus: ^6.0.0
   toast: ^0.3.0
-  flutter_compass: ^0.7.0
+  flutter_compass: ^0.8.1
   lan_scanner: ^3.5.0
   shared_preferences: ^2.2.2
-  latlng: ^2.0.0
+  latlng: ^1.0.4
   ffi: ^2.1.0
   usb_serial: ^0.5.1
 
