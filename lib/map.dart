@@ -20,6 +20,10 @@ class CustomMapState extends State<CustomMap> {
 
   bool _darkMode = false;
 
+  // The current coordinate transformer, provided by MapLayoutBuilder on each build.
+  // Needed for panning, since MapTransformer.drag() is where panning lives in map 1.x.
+  MapTransformer? _transformer;
+
   CustomMapState() {
     NMEA.mapState = this;
   }
@@ -69,7 +73,7 @@ class CustomMapState extends State<CustomMap> {
       final now = details.focalPoint;
       final diff = now - _dragStart!;
       _dragStart = now;
-      controller.drag(diff.dx, diff.dy);
+      _transformer?.drag(diff.dx, diff.dy);
       setState(() {});
     }
   }
@@ -108,12 +112,14 @@ class CustomMapState extends State<CustomMap> {
       body: MapLayoutBuilder(
         controller: controller,
         builder: (context, transformer) {
+          _transformer = transformer;
+
           var homeMarkerWidget = _buildMarkerWidget(
-              transformer.fromLatLngToXYCoords(
+              transformer.toOffset(
                   LatLng(NMEA.pos.latitude, NMEA.pos.longitude)),
               const Color(0xFF424242));
           var homeMarkerLabel = _buildMarkerLabel(
-              transformer.fromLatLngToXYCoords(
+              transformer.toOffset(
                   LatLng(NMEA.pos.latitude, NMEA.pos.longitude)));
 
           return GestureDetector(
@@ -123,9 +129,9 @@ class CustomMapState extends State<CustomMap> {
             onScaleUpdate: _onScaleUpdate,
             onTapUp: (details) {
               final location =
-                  transformer.fromXYCoordsToLatLng(details.localPosition);
+                  transformer.toLatLng(details.localPosition);
 
-              final clicked = transformer.fromLatLngToXYCoords(location);
+              final clicked = transformer.toOffset(location);
 
               debugPrint('${location.longitude}, ${location.latitude}');
               debugPrint('${clicked.dx}, ${clicked.dy}');
